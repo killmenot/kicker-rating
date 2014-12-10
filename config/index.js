@@ -25,7 +25,7 @@ var config = {
 
 if (global.process.env.REDISTOGO_URL) {
     var rtg = url.parse(global.process.env.REDISTOGO_URL);
-    common.production.redis = {
+    config.common.production.redis = {
         port: rtg.port,
         hostname: rtg.hostname,
         username: rtg.auth.split(':')[0],
