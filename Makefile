@@ -3,6 +3,7 @@ install:
 	npm install
 	rm -rf public/assets/components
 	bower install
+	chmod +x scripts/init-database.sh
 
 run:
 	npm start
