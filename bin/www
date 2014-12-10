@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+var debug = require('debug')('kicker-rating');
+var config = require('../config');
+
+// initialize redis connection
+var redis = require('redis').createClient(config.redis.port, config.redis.hostname);
+if (config.redis.username && config.redis.password) {
+    redis.auth(config.redis.password);
+}
+
+// initialize express application
+var app = require('../app')(redis);
+
+// configure passport
+require('../config/passport')(app);
+
+// run express
+app.set('port', process.env.PORT || config.server.port);
+
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
