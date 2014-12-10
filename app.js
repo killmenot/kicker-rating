@@ -10,7 +10,7 @@ var flash = require('connect-flash');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
 
-module.exports = function (redis) {
+module.exports = function (redis, db) {
     var app = express();
 
     // view engine setup
@@ -40,8 +40,8 @@ module.exports = function (redis) {
 
     var access = require('./config/roles')(app);
 
-    app.use('/', require('./routes/index')(access));
-    app.use('/admin', require('./routes/admin')(access));
+    app.use('/', require('./routes/index')(access, db));
+    app.use('/admin', require('./routes/admin')(access, db));
 
     //app.use('/', require('./routes/index'));
     //app.use('/admin', require('./routes/admin'));

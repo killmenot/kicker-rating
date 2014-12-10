@@ -4,4 +4,10 @@ install:
 	rm -rf public/assets/components
 	bower install
 
-.PHONY: install run
+run:
+	npm start
+
+database:
+	./scripts/init-database.sh
+
+.PHONY: install run database
