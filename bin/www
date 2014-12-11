@@ -3,7 +3,6 @@
 var path = require('path');
 var debug = require('debug')('kicker-rating');
 var config = require('../config');
-var Sequelize = require('sequelize');
 
 // initialize redis connection
 var redis = require('redis').createClient(config.redis.port, config.redis.hostname);
@@ -11,28 +10,8 @@ if (config.redis.username && config.redis.password) {
   redis.auth(config.redis.password);
 }
 
-// initialize postgres connection
-var sequelize = new Sequelize(config.psql.database, config.psql.username, config.psql.password, {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  port: config.psql.port,
-  host: config.psql.host,
-  logging: config.sequelize.logging,
-  define: {
-    underscored: config.sequelize.define.underscored,
-    underscoredAll: config.sequelize.define.underscoredAll,
-  }
-});
-
-// initialize postgres connection
-var db = {
-  sequelize: sequelize,
-  Sequelize: Sequelize,
-  Member: sequelize.import(path.join(__dirname, '../models/member'))
-};
-
 // initialize express application
-var app = require('../app')(redis, db);
+var app = require('../app')(redis);
 
 // configure passport
 require('../config/passport')(app);

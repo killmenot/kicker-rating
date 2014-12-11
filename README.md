@@ -13,4 +13,5 @@ Dashboard application for kicker rating
 
 
 ## Run
+* `redis-server`
 * `make run`

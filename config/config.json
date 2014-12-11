@@ -1,0 +1,32 @@
+{
+  "development": {
+    "username": "pgrating",
+    "password": "pgrating",
+    "database": "rating",
+    "host": "127.0.0.1",
+    "port": "5432",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "define": {
+      "underscored": true,
+      "underscoredAll": true
+    }
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "./db.test.sqlite",
+    "define": {
+      "underscored": true,
+      "underscoredAll": true
+    }
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres",
+    "protocol": "postgres",
+    "define": {
+      "underscored": true,
+      "underscoredAll": true
+    }
+  }
+}
