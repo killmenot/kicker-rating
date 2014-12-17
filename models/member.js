@@ -7,7 +7,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     note: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: true,
     }
   }, classMethods: {

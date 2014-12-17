@@ -1,22 +1,21 @@
 'use strict';
+
 module.exports = {
   up: function(migration, DataTypes, done) {
-    migration.createTable('members', {
+    migration.createTable('seasons', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      first_name: {
-        allowNull: false,
-        type: DataTypes.STRING
+      location_id: {
+        type: DataTypes.INTEGER
       },
-      last_name: {
-        allowNull: false,
-        type: DataTypes.STRING
+      date_started: {
+        type: DataTypes.DATE
       },
-      date_birth: {
+      date_ended: {
         allowNull: true,
         type: DataTypes.DATE
       },
@@ -32,9 +31,9 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    }).finally(done);
+    }).done(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable('members').finally(done);
+    migration.dropTable('seasons').done(done);
   }
 };
