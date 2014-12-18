@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('season', {
-    location_id: DataTypes.INT,
+  return sequelize.define('Season', {
+    location_id: DataTypes.INTEGER,
     date_started: DataTypes.DATE,
     date_ended: {
       type: DataTypes.DATE,

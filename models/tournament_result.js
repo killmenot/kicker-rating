@@ -2,10 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('TournamentResult', {
-    tournament_id: DataTypes.INT,
-    member_id: DataTypes.INT,
-    season_id: DataTypes.INT,
-    score: DataTypes.INT,
+    tournament_id: DataTypes.INTEGER,
+    member_id: DataTypes.INTEGER,
+    season_id: DataTypes.INTEGER,
+    score: DataTypes.INTEGER,
     note: {
       type: DataTypes.TEXT,
       allowNull: true
