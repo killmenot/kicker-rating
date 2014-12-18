@@ -1,15 +1,15 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var season = sequelize.define('season', {
+  return sequelize.define('season', {
     location_id: DataTypes.INT,
     date_started: DataTypes.DATE,
     date_ended: {
-      DataTypes.DATE,
-      allowNull: true
+      type: DataTypes.DATE,
+        allowNull: true
     },
     note: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
@@ -19,6 +19,4 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
-  return season;
 };

@@ -1,13 +1,13 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  var tournament = sequelize.define('Tournament', {
+  return sequelize.define('Tournament', {
     name: DataTypes.STRING,
     date: DataTypes.DATE,
     season_id: DataTypes.INT,
     location_id: DataTypes.INT,
     note: {
-      type: Sequelize.TEXT,
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {
@@ -17,6 +17,4 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-
-  return tournament;
 };

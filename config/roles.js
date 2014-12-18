@@ -22,5 +22,5 @@ module.exports = function (app) {
     if_logged_in_as_admin: function () {
       return user.can('access if logged in as admin');
     }
-  }
+  };
 };
