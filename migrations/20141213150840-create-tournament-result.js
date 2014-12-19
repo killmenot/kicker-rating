@@ -32,9 +32,9 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    }).done(done);
+    }).finally(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable('tournament_results').done(done);
+    migration.dropTable('tournament_results').finally(done);
   }
 };

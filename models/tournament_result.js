@@ -13,7 +13,9 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.TournamentResult.belongsTo(models.Tournament);
+        models.TournamentResult.belongsTo(models.Member);
+        models.TournamentResult.belongsTo(models.Season);
       }
     }
   });

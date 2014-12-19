@@ -31,9 +31,9 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    }).done(done);
+    }).finally(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable('seasons').done(done);
+    migration.dropTable('seasons').finally(done);
   }
 };

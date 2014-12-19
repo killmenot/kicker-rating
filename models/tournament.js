@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.Tournament.belongsTo(models.Season);
+        models.Tournament.belongsTo(models.Location);
       }
     }
   });

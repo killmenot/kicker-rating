@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.Location.hasMany(models.Season);
+        models.Location.hasMany(models.Tournament);
       }
     }
   });

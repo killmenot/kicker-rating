@@ -33,9 +33,9 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    }).done(done);
+    }).finally(done);
   },
   down: function(migration, DataTypes, done) {
-    migration.dropTable('tournaments').done(done);
+    migration.dropTable('tournaments').finally(done);
   }
 };
