@@ -36,6 +36,11 @@ module.exports = function (redis) {
     }));
     app.use(flash());
 
+    app.use(function (req, res, next) {
+      res.locals.user = req.user;
+      next();
+    });
+
     require('./config/passport')(app);
 
     var access = require('./config/roles')(app);

@@ -1,29 +1,22 @@
 var passport = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
+    LocalStrategy = require('passport-local').Strategy,
+    models = require('../models');
+
 
 
 module.exports = function (app) {
     passport.use(new LocalStrategy(
         function (username, password, done) {
-            done(null, {id: 1});
-            // User.findOne({
-            //     username: username
-            // }, function (err, user) {
-            //     if (err) {
-            //         return done(err);
-            //     }
-            //     if (!user) {
-            //         return done(null, false, {
-            //             message: 'Incorrect username.'
-            //         });
-            //     }
-            //     if (!user.validPassword(password)) {
-            //         return done(null, false, {
-            //             message: 'Incorrect password.'
-            //         });
-            //     }
-            //     return done(null, user);
-            // });
+          models.User.find({ where: {username: username} })
+            .then(function (user) {
+              if (!user || !user.validate_password(password)) {
+                return done(null, false, {message: 'Incorrect username or password'});
+              }
+              done(null, user);
+            })
+            .catch(function (err) {
+              done(err);
+            });
         }
     ));
 
@@ -32,10 +25,13 @@ module.exports = function (app) {
     });
 
     passport.deserializeUser(function (id, done) {
-        // User.findById(id, function (err, user) {
-        //     done(err, user);
-        // });
-        done(null, {id: 1});
+      models.User.find(id)
+        .then(function (user) {
+          done(null, user);
+        })
+        .catch(function (err) {
+          done(err);
+        });
     });
 
     app.use(passport.initialize());
