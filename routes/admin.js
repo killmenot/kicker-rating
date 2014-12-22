@@ -13,10 +13,10 @@ module.exports = function (access) {
       models.sequelize.sync({ force: force }).complete(function (err) {
         if (err) {
           console.error(err);
-          res.end('[ ERROR ] Synchronized database');
+          res.end('[ ERROR ] Synchronized database failed.');
         } else {
-          console.log('[ OK ] Synchronized database');
-          res.end('[ OK ] Synchronized database');
+          console.log('[ OK ] Synchronized database.');
+          res.end('[ OK ] Synchronized database.');
         }
       });
     });
