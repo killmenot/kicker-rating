@@ -2,7 +2,10 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Season', {
-    location_id: DataTypes.INTEGER,
+    location_id: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    },
     date_started: DataTypes.DATE,
     date_ended: {
       type: DataTypes.DATE,

@@ -10,7 +10,8 @@ module.exports = {
         type: DataTypes.INTEGER
       },
       location_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        defaultValue: 1
       },
       date_started: {
         type: DataTypes.DATE
