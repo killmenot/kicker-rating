@@ -8,13 +8,18 @@ module.exports = function(sequelize, DataTypes) {
     },
     date_started: DataTypes.DATE,
     date_ended: {
-      type: DataTypes.DATE,
-        allowNull: true
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: null
     },
     note: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    }
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: true
+      }
   }, {
     classMethods: {
       associate: function(models) {
