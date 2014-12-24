@@ -3,3 +3,21 @@
         <a href="#create_season" class="btn btn-success">Create Season</a>
     </div>
 </div>
+<div class="row">
+    <%if (seasons.length) { %>
+        <% _.each(seasons,function(i,n) {%>
+            <div class="row">
+                <div class="col-md-6">
+                <% if (i.name)  { %>
+                    <span><%=i.name%> (<%=i.date_started%> - <%=i.date_ended%>)</span>
+                <% } else {%>
+                    <span><%=i.date_started%> - <%=i.date_ended%></span>
+                <% }%>
+
+                </div>
+                <div class="col-md-6"><a class="btn btn-danger">delete</a></div>
+
+            </div>
+        <%})%>
+    <% } %>
+</div>

@@ -3,7 +3,7 @@ define([
   'underscore',
   'backbone',
   'text!templates/season_create.html',
-  '../models/season.js',
+  'models/season',
   'datepicker'
 ], function($, _, Backbone, TEMPLATE_season_create,Season){
   var SeasonCreate = Backbone.View.extend({
@@ -28,8 +28,8 @@ define([
     },
     submit:function(){
       this.model.set({
-          start: this.$el.find('input[name=start]').val(),
-          end: this.$el.find('input[name=end]').val(),
+          date_started: this.$el.find('input[name=start]').val(),
+          date_ended: this.$el.find('input[name=end]').val(),
           name: this.$el.find('input[name=name]').val(),
           note:this.$el.find('rextarea[name=note]').val()
       })

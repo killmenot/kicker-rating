@@ -5,7 +5,8 @@ define([
   'backbone',
   'js/views/season_create.js',
   'js/views/season_list.js',
-], function($, _, Backbone,SeasonCreate,Season_List){
+  'collections/season_collection'
+], function($, _, Backbone,SeasonCreate,Season_List,SeasonCollection){
   window.BASE_URL = 'http://'+window.location.host;
   Backbone.View.prototype.leave = function(){
     this.off();
@@ -35,9 +36,13 @@ define([
     },
     listSeasons: function(){
       var self=this;
-      var SeasonList = new Season_List();
-      self.swap(SeasonList);
-      SeasonList.render();
+      var seasonCollection = new SeasonCollection();
+      seasonCollection.fetch().done(function(response){
+        var SeasonList = new Season_List({collection:seasonCollection});
+        self.swap(SeasonList);
+        SeasonList.render();
+        
+      })
     },
     createSeason: function(){
       var self=this;

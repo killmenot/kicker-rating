@@ -13,15 +13,27 @@ module.exports = function (access) {
   });
 
 
+
+  router.get('/api/season', function (req, res) {
+    models.Season.findAll()
+    .then(function(seasons) {
+      res.json(seasons)
+    })
+    .catch(function(err){
+      res.status(400);
+      res.json({error:err.message});
+    });
+  });
+
   router.post('/api/season', access.if_logged_in_as_admin(), function (req, res) {
-      if (req.body.name.length === 0 && req.body.end.length === 0) {
+      if (req.body.name.length === 0 && req.body.date_ended.length === 0) {
         res.status(400);
         res.json({error:'name or date ended should be filled'});
       }
-      if (req.body.end.length === 0) { req.body.end=null; }
+      if (req.body.date_ended.length === 0) { req.body.date_ended=null; }
       models.Season.build({
-        date_started:req.body.start,
-        date_ended:req.body.end,
+        date_started:req.body.date_started,
+        date_ended:req.body.date_ended,
         note:req.body.note,
         name:req.body.name
       }).save()
