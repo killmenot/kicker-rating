@@ -1,0 +1,49 @@
+<div class="list_season_wrapper">
+    <div class = 'row'>
+        <div class="pull-right">
+            <a href="#create_season" class="btn btn-success">Create Season</a>
+        </div>
+    </div>
+    <div class="row">
+        <p class="bg-danger errors"></p>
+    </div>
+    <div class="row">
+        <%if (seasons.length) { %>
+            <% _.each(seasons,function(i,n) {%>
+                <div class="row season-wrapper">
+                    <div class="col-md-6">
+                    <% if (i.name)  { %>
+                        <span><%=i.name%> (<%=i.date_started%> - <%=i.date_ended%>)</span>
+                    <% } else {%>
+                        <span><%=i.date_started%> - <%=i.date_ended%></span>
+                    <% }%>
+
+                    </div>
+                    <div class="col-md-6"><a class="btn btn-danger delete" data-item="<%=i.id%>">delete</a></div>
+
+                </div>
+            <%})%>
+        <% } %>
+    </div>
+
+
+
+    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">&nbsp;</h4>
+          </div>
+          <div class="modal-body">
+            Are you sure?
+          </div>
+          <div class="modal-footer">
+            <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>
+            <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>

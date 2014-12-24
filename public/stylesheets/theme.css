@@ -16,3 +16,7 @@ body {
 .theme-showcase .navbar .container {
   width: auto;
 }
+
+.input-daterange.full-width {
+    width: 100%;
+}
