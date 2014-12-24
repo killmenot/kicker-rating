@@ -7,6 +7,11 @@ module.exports = function (access) {
       res.render('admin/index', { title: 'Admin Home' });
     });
 
+    router.get('/create_season', access.if_logged_in_as_admin(), function (req, res) {
+      res.render('admin/create_season', { title: 'Create Season' });
+    });
+
+
     router.get('/sync', access.if_logged_in_as_admin(), function (req, res) {
       var force = req.query.hasOwnProperty('force');
 
