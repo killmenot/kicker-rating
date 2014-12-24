@@ -2,17 +2,17 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/season_create.html',
-  'models/season',
+  'text!templates/tournament_create.html',
+  'models/tournament',
   'datepicker'
-], function($, _, Backbone, TEMPLATE_season_create,Season){
-  var SeasonCreate = Backbone.View.extend({
+], function($, _, Backbone, TEMPLATE_tournament_create,Tournament){
+  var TournamentCreate = Backbone.View.extend({
     container: $('#content-container'),
-    template: _.template(TEMPLATE_season_create),
+    template: _.template(TEMPLATE_tournament_create),
     events: {
     },
     render: function() {
-      this.setElement(this.template({template_name:'Create Season'}));
+      this.setElement(this.template({template_name:'Create tournament'}));
       this.container.append(this.$el);
       $('.input-daterange').datepicker({
           format: "yyyy-mm-dd",
@@ -21,15 +21,15 @@ define([
           autoclose: true,
           todayHighlight: true
       });
-      this.$el.find('#save_new_season').on('click',$.proxy(this.submit,this));
+      this.$el.find('#save_new_tournament').on('click',$.proxy(this.submit,this));
     },
     initialize: function(){
-      this.model = new Season();
+      this.model = new Tournament();
     },
     submit:function(){
+
       this.model.set({
-          date_started: this.$el.find('input[name=start]').val(),
-          date_ended: this.$el.find('input[name=end]').val(),
+          date: this.$el.find('input[name=date]').val(),
           name: this.$el.find('input[name=name]').val(),
           note:this.$el.find('textarea[name=note]').val()
       })
@@ -39,13 +39,16 @@ define([
             if (data && data.message) {
                 self.renderHandleError(data.message);
             } else {
-                window.location.hash = "list_seasons";
+              console.log('data',data);
+              window.location.hash = "list_seasons";
             }
         },function(e){
+          if (/\{/.test(e.responseText)) {
             var error = JSON.parse(e.responseText);
             if (error && error.error) {
               self.showError(error.error);
             }
+          }
         });
       } else {
           if (this.model.validationError.message){
@@ -59,5 +62,5 @@ define([
                   .show();
     }
   });
-  return SeasonCreate;
+  return TournamentCreate;
 });

@@ -17,7 +17,6 @@ define([
     validate: function(attrs, options) {
       var errors = {};
       if($.trim(attrs.date_ended).length === 0 && $.trim(attrs.name).length === 0){
-       console.log('attr',attrs);
         errors.message = 'name or date ended should be filled';
       }
       return (!_.isEmpty(errors))?errors:'';

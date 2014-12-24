@@ -110,6 +110,44 @@ function updateSeason(req,res) {
 }
 
 
+  router.post('/api/tournament', access.if_logged_in_as_admin(), function (req, res) {
+      if (req.body.note.length === 0) {
+        res.status(400);
+        res.json({error:'note should be filled'});
+      }
+      if (req.body.date.length === 0) { req.body.date=null; }
+
+      models.Season.find({where:{activated:true,location_id:1}
+      })
+      .then(function(season){
+        if (!season){
+          res.status(400);
+          res.json({error:'tournament cannot be added because no active season'});
+        } else {
+            models.Tournament.build({
+                date:req.body.date,
+                note:req.body.note,
+                name:req.body.name,
+                location_id:req.body.location_id,
+                season_id:season.dataValues.id
+            }).save()
+            .then(function(data){
+              res.json(data.dataValues);
+            })
+            .catch(function(err){
+              res.status(400);
+              res.json({error:err.message});
+            });
+          
+        }
+      })
+      .catch(function(err){
+        res.status(400);
+        res.json({error:err.message});
+      });
+  });
+
+
 
   router.post('/login', passport.authenticate('local', { successReturnToOrRedirect: '/admin', failureRedirect: '/login' }));
 

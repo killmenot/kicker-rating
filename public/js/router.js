@@ -5,8 +5,10 @@ define([
   'backbone',
   'js/views/season_create.js',
   'js/views/season_list.js',
-  'collections/season_collection'
-], function($, _, Backbone,SeasonCreate,Season_List,SeasonCollection){
+  'collections/season_collection',
+  'js/views/tournament_create.js'
+
+], function($, _, Backbone,SeasonCreate,Season_List,SeasonCollection,TournamentCreate){
   window.BASE_URL = 'http://'+window.location.host;
   Backbone.View.prototype.leave = function(){
     this.off();
@@ -26,6 +28,7 @@ define([
     routes: {
       'create_season':'createSeason',
       'list_seasons':'listSeasons',
+      'create_tournament':'createTournament',
       '*actions': 'defaultAction'
     },
     initialize: function(){
@@ -45,10 +48,14 @@ define([
       })
     },
     createSeason: function(){
-      var self=this;
       var seasonCreate = new SeasonCreate();
-      self.swap(seasonCreate);
+      this.swap(seasonCreate);
       seasonCreate.render();
+    },
+    createTournament: function(){
+      var tournamentCreate = new TournamentCreate();
+      this.swap(tournamentCreate);
+      tournamentCreate.render();
     },
     swap: function(view){
       if (this.currentView){

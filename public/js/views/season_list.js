@@ -78,7 +78,7 @@ define([
         self.render();
 
       },function(err){
-        if (/${/.test(err.responseText)) {
+        if (/\{/.test(err.responseText)) {
           var error = JSON.parse(err.responseText);
           if (error && error.error) {
             self.showError(error.error);
