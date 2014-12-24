@@ -13,13 +13,18 @@
                 <div class="row season-wrapper">
                     <div class="col-md-6">
                     <% if (i.name)  { %>
-                        <span><%=i.name%> (<%=i.date_started%> - <%=i.date_ended%>)</span>
+                        <span><strong><%=i.name%></strong> (<%=i.date_started%> - <%=i.date_ended%>)</span>
                     <% } else {%>
                         <span><%=i.date_started%> - <%=i.date_ended%></span>
                     <% }%>
 
                     </div>
-                    <div class="col-md-6"><a class="btn btn-danger delete" data-item="<%=i.id%>">delete</a></div>
+                    <div class="action-wrapper">
+                        <% if (!i.activated)  {%>
+                            <div class="col-md-3"><a class="btn btn-primary activate" data-item="<%=i.id%>">Activate</a></div>
+                            <div class="col-md-3"><a class="btn btn-danger delete" data-item="<%=i.id%>">Delete</a></div>
+                        <% } %>
+                    </div>
 
                 </div>
             <%})%>

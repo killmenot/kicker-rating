@@ -9,7 +9,8 @@ define([
       date_started: null,
       date_ended: null,
       name: null,
-      note:null
+      note:null,
+      activated:null
     },
     initialize: function(){
     },
@@ -20,6 +21,22 @@ define([
         errors.message = 'name or date ended should be filled';
       }
       return (!_.isEmpty(errors))?errors:'';
+    },
+    statusDeactivate: function(data) {
+      var newdate;
+      var startedDate = new Date(this.get('date_started'));
+      var currentDate = new Date(data);
+      currentDate.setDate(currentDate.getDate()-1);
+      if (currentDate>startedDate) {
+        var month = currentDate.getMonth() + 1;
+        var day = currentDate.getDate();
+        var year = currentDate.getFullYear();
+        newdate = year + "-" + month + "-" + day;
+      } else {
+        newdate = this.get('date_started');
+      }
+      console.log('newDate',newdate);
+      this.set({date_ended:newdate});
     }
   });
 

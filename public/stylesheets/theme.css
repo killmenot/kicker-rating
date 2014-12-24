@@ -20,3 +20,9 @@ body {
 .input-daterange.full-width {
     width: 100%;
 }
+
+.season-wrapper {
+    margin: 10px 0 10px;
+    line-height: 34px;
+    vertical-align: middle;
+}

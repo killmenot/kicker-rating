@@ -49,6 +49,10 @@ module.exports = function (access) {
   router.delete('/api/season/:id', access.if_logged_in_as_admin(), function (req, res) {
     models.Season.find(req.params.id)
     .then(function(season){
+      if (season.dataValues.activated) {
+        res.status(400);
+        res.json({error:'it is impossible to delete activated season'});
+      }
       season.destroy()
       .then(function(){
         res.status(200);
@@ -64,6 +68,46 @@ module.exports = function (access) {
       res.json({error:'problems on destroying process, please try again later'});
     });
   });
+
+  router.put('/api/season/:id', access.if_logged_in_as_admin(), function (req, res) {
+    if (req.body.activated) {
+      models.Season.update({activated:null},{where:{activated:true}})
+      .then(function(seasons){
+        updateSeason(req,res);
+      })
+      .catch(function(err){
+        console.log(err);
+        res.status(400);
+        res.json({error:'problems on updation process, please try again later'});
+      })
+    } else {
+      updateSeason(req,res);
+    }
+  });
+
+function updateSeason(req,res) {
+  models.Season.find(req.params.id)
+  .then(function(season){
+    season.updateAttributes({
+      date_started:req.body.date_started,
+      date_ended:req.body.date_ended,
+      note:req.body.note,
+      name:req.body.name,
+      activated:req.body.activated
+    }).then(function() {
+      res.status(200);
+      res.json(season);
+    })
+      .catch(function(){
+      res.status(400);
+      res.json({error:'problems on activating process, please try again later'});
+    });
+  })
+  .catch(function(){
+    res.status(400);
+    res.json({error:'problems on activating process, please try again later'});
+  });
+}
 
 
 
