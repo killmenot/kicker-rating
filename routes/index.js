@@ -46,6 +46,26 @@ module.exports = function (access) {
       });
   });
 
+  router.delete('/api/season/:id', access.if_logged_in_as_admin(), function (req, res) {
+    models.Season.find(req.params.id)
+    .then(function(season){
+      season.destroy()
+      .then(function(){
+        res.status(200);
+        res.json(season);
+      })
+      .catch(function(){
+        res.status(400);
+        res.json({error:'problems on destroying process, please try again later'});
+      });
+    })
+    .catch(function(){
+      res.status(400);
+      res.json({error:'problems on destroying process, please try again later'});
+    });
+  });
+
+
 
   router.post('/login', passport.authenticate('local', { successReturnToOrRedirect: '/admin', failureRedirect: '/login' }));
 

@@ -42,15 +42,15 @@ define([
                 window.location.hash = "list_seasons";
             }
         },function(e){
-          var error = JSON.parse(e.responseText);
-                if (error && error.error) {
-                  self.showError(error.error);
-                }
+            var error = JSON.parse(e.responseText);
+            if (error && error.error) {
+              self.showError(error.error);
+            }
         });
       } else {
-        if (this.model.validationError.message){
-          this.showError(this.model.validationError.message);
-        }
+          if (this.model.validationError.message){
+            this.showError(this.model.validationError.message);
+          }
       }
       console.log('submit')
     },
