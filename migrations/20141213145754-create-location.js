@@ -1,5 +1,7 @@
 'use strict';
 
+var models  = require('../models');
+
 module.exports = {
   up: function(migration, DataTypes, done) {
     migration.createTable('locations', {
@@ -23,7 +25,10 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       }
-    }).finally(done);
+    }).finally(function(){
+      models.Location.build({name: 'Taganrog',note:'Russia,Rostov-on-Don,Taganrog'})
+      .save().finally(done);
+    });
   },
   down: function(migration, DataTypes, done) {
     migration.dropTable('locations').finally(done);

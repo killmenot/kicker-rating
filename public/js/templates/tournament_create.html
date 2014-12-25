@@ -1,0 +1,46 @@
+<form class="col-md-6 col-md-offset-3">
+    <div class="row">
+        <h1><%=template_name%></h1>
+    </div>
+    <div class="row">
+        <p class="bg-danger errors"></p>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+                <label for="date_ended">Date</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-daterange input-group full-width" id="datepicker">
+                    <input type="text" class="input-sm form-control" name="date" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="note">Note</label>
+                <textarea name="note" id="note" class="form-control"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+                <a href="#" class="btn btn-danger form-control">Cancel</a>
+        </div>
+        <div class="col-md-6">
+                <a id="save_new_tournament" class="btn btn-success form-control">Submit</a>
+        </div>
+    </div>
+</form>
