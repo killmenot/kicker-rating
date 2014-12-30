@@ -4,7 +4,7 @@
   "description": "The stats app for kiker rating",
   "scripts": {
     "start": "./bin/www",
-    "postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "rm -rf public/assets/components && ./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",

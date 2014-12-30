@@ -1,14 +1,19 @@
 install:
 	rm -rf node_modules
 	npm install
-	rm -rf public/assets/components
-	bower install
 	chmod +x scripts/init-database.sh
+	chmod +x scripts/reset-database.sh
 
 run:
 	npm start
 
-database:
+init-database:
 	./scripts/init-database.sh
 
-.PHONY: install run database
+reset-database:
+	./scripts/reset-database.sh
+
+migrate:
+	./node_modules/.bin/sequelize db:migrate
+
+.PHONY: install run init-database reset-database migrate

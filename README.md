@@ -9,7 +9,7 @@ Dashboard application for kicker rating
 ## Setup
 * `git clone git@github.com:killmenot/kicker-rating.git`
 * `cd kicker-rating && make install`
-* `make database`
+* `make init-database`
 
 
 ## Run
