@@ -1,6 +1,6 @@
 var express = require('express');
-var models  = require('../models');
 var router = express.Router();
+var models  = require('../models');
 
 module.exports = function (access) {
     router.get('/', access.if_logged_in_as_admin(), function (req, res) {

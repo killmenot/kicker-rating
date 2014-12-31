@@ -1,0 +1,6 @@
+{
+  "html": {
+    "allowed_file_extensions": ["ejs"],
+    "indent_size": 2
+  }
+}

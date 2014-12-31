@@ -5,10 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
+var expressSanitizer = require('express-sanitizer');
 var session = require('express-session');
 var flash = require('connect-flash');
 var RedisStore = require('connect-redis')(session);
 var config = require('./config');
+var bodyExpressSanitizer = require('./lib/middleware/sanitizer');
 
 module.exports = function (redis) {
     var app = express();
@@ -25,6 +27,8 @@ module.exports = function (redis) {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(cookieParser());
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(expressSanitizer());
+    app.use(bodyExpressSanitizer());
 
     app.use(session({
         store: new RedisStore({
@@ -38,6 +42,12 @@ module.exports = function (redis) {
 
     app.use(function (req, res, next) {
       res.locals.user = req.user;
+
+      var flash = req.flash();
+      res.locals.success = flash.success || '';
+      res.locals.info = flash.info || '';
+      res.locals.error = flash.error || '';
+
       next();
     });
 
@@ -47,6 +57,7 @@ module.exports = function (redis) {
 
     app.use('/', require('./routes/index')(access));
     app.use('/admin', require('./routes/admin')(access));
+    app.use('/admin/seasons', require('./routes/admin_seasons')(access));
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {

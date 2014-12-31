@@ -9,10 +9,16 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
+      name: {
+        allowNull: true,
+        type: DataTypes.STRING
+      },
       location_id: {
+        allowNull: false,
         type: DataTypes.INTEGER
       },
       date_started: {
+        allowNull: false,
         type: DataTypes.DATE
       },
       date_ended: {

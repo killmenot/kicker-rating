@@ -2,11 +2,27 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Season', {
-    location_id: DataTypes.INTEGER,
-    date_started: DataTypes.DATE,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    location_id: {
+      type: DataTypes.INTEGER, 
+      allowNull: false
+    },
+    date_started: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isDate: true
+      }
+    },
     date_ended: {
       type: DataTypes.DATE,
-        allowNull: true
+      allowNull: true,
+      validate: {
+        isDate: true
+      }
     },
     note: {
       type: DataTypes.TEXT,
@@ -16,7 +32,6 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         models.Season.hasMany(models.Tournament);
-        
         models.Season.belongsTo(models.Location);
       }
     }
