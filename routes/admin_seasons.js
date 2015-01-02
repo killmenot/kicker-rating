@@ -5,7 +5,16 @@ var _ = require('underscore');
 
 module.exports = function (access) {
     router.get('/', access.if_logged_in_as_admin(), function (req, res) {
-      res.render('admin/seasons/index', { title: 'Seasons list' });
+      models.Location.find({where: {name: 'Taganrog'}}).then(function (location) {
+        models.Season.findAll({where: {location_id: location.id}}).then(function (seasons) {
+          res.render('admin/seasons/index', {
+            mainNav: 'admin',
+            subNav: 'seasons',
+            title: 'Seasons list',
+            seasons: seasons
+          });
+        });
+      });
     });
 
     router.get('/create', access.if_logged_in_as_admin(), function (req, res) {

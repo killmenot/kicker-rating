@@ -1,5 +1,7 @@
 'use strict';
 
+var moment = require('moment');
+
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('Season', {
     name: {
@@ -34,6 +36,17 @@ module.exports = function(sequelize, DataTypes) {
         models.Season.hasMany(models.Tournament);
         models.Season.belongsTo(models.Location);
       }
+    },
+    getterMethods: {
+      title: function () {
+        var range = moment(this.date_started).format('LL') + ' - ' + (this.date_ended ? moment(this.date_ended).format('LL') : '');
+
+        if (this.name) {
+          return this.name + '(' + range + ')';
+        }
+        
+        return range;
+      }
     }
   });
-};
+};  
