@@ -1,7 +1,7 @@
 {
   "name": "kicker-rating",
   "version": "0.1.0",
-  "description": "The stats app for kiker rating",
+  "description": "The stats app for kicker rating",
   "scripts": {
     "start": "./bin/www",
     "postinstall": "rm -rf public/assets/components && ./node_modules/bower/bin/bower install"

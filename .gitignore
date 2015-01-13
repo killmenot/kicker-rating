@@ -33,3 +33,6 @@ node_modules
 
 # Bower
 public/assets/components
+
+# Redis
+dump.rdb

@@ -11,6 +11,8 @@ Dashboard application for kicker rating
 * `cd kicker-rating && make install`
 * `make init-database`
 
+## Migration
+* `make migrate`
 
 ## Run
 * `redis-server`

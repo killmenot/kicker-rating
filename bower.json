@@ -5,7 +5,7 @@
   "authors": [
     "Alexey Kucherenko <alexei.kucherenko@gmail.com>"
   ],
-  "description": "The stats app for kiker rating",
+  "description": "The stats app for kicker rating",
   "license": "MIT",
   "private": true,
   "ignore": [
