@@ -4,6 +4,16 @@ var express = require('express'),
     _ = require('underscore'),
     moment = require('moment');
 
+function renderEditView(res, values, errors) {
+    res.render('admin/seasons/edit', {
+        mainNav: 'admin',
+        subNav: 'seasons',
+        title: values.id ? 'Edit season' : 'Create season',
+        values: values,
+        errors: errors ? _.object(_.map(errors, function (error) { return [error.path, error]; })) : {}
+    });
+}
+
 module.exports = function (access) {
     router.get('/', access.if_logged_in_as_admin(), function (req, res) {
         req.context.getSeasons().then(function (seasons) {
@@ -18,13 +28,10 @@ module.exports = function (access) {
 
     router.get('/create', access.if_logged_in_as_admin(), function (req, res, next) {
         req.context.getSeasons().then(function (seasons) {
-            res.render('admin/seasons/create', {
-                title: 'Create season',
-                errors: {},
-                values: {
-                    default: (seasons && seasons.length === 0)
-                }
-            });
+            var defaultSeasonValues = {
+                default: (seasons && seasons.length === 0)
+            };
+            renderEditView(res, defaultSeasonValues);
         }).catch(next);
     });
 
@@ -36,6 +43,7 @@ module.exports = function (access) {
             note: req.body.note
         };
 
+        console.log(req.body.default, !!req.body.default);
         if (req.body.default) {
             seasonValues.default = !!req.body.default;
         }
@@ -67,13 +75,7 @@ module.exports = function (access) {
             req.flash('success', 'The season was added successfully.');
             res.redirect('/admin/seasons');
         }).catch(db.Sequelize.ValidationError, function (err) {
-            res.render('admin/seasons/create', {
-                title: 'Create season',
-                values: req.body,
-                errors: _.object(_.map(err.errors, function (error) {
-                    return [error.path, error];
-                }))
-            });
+            renderEditView(res, seasonValues, err.errors);
         }).catch(next);
     });
 
@@ -88,16 +90,13 @@ module.exports = function (access) {
                 }
             })
         }).then(function (season) {
-            res.render('admin/seasons/create', {
-                title: 'Edit season',
-                errors: {},
-                values: {
-                    name: season.name,
-                    date_started: moment(season.date_started).format('L'),
-                    date_ended: season.date_ended,
-                    note: season.note,
-                    default: season.default
-                }
+            renderEditView(res, {
+                id: season.id,
+                name: season.name,
+                date_started: moment(season.date_started).format('L'),
+                date_ended: season.date_ended,
+                note: season.note,
+                default: season.default
             });
         }).catch(next);
     });
@@ -149,13 +148,8 @@ module.exports = function (access) {
             req.flash('success', 'The season was updated successfully.');
             res.redirect('/admin/seasons');
         }).catch(db.Sequelize.ValidationError, function (err) {
-            res.render('admin/seasons/create', {
-                title: 'Edit season',
-                values: req.body,
-                errors: _.object(_.map(err.errors, function (error) {
-                    return [error.path, error];
-                }))
-            });
+            seasonValues.id = seasonId;
+            renderEditView(res, seasonValues, err.errors);
         }).catch(next);
     });
 

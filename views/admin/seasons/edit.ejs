@@ -36,7 +36,7 @@
     <div class="col-md-12">
       <div class="checkbox mt-0">
         <label>
-          <input type="checkbox" name="default" <%= (!!values.default) ? 'checked' : '' %> />Make default
+          <input type="checkbox" name="default" <%= (values.id && !!values.default) ? 'disabled' : '' %> <%= (!!values.default) ? 'checked' : '' %> />Make default
         </label>
       </div>
     </div>
@@ -53,7 +53,7 @@
     <div class="col-md-12">
       <input type="submit" class="btn btn-primary" value="Submit" />
       or 
-      <a href="/admin/seasons" class="">Cancel</a>
+      <a href="/admin/seasons">Cancel</a>
     </div>
   </div>
 </form>
