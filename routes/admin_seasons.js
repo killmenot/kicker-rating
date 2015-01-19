@@ -87,7 +87,7 @@ module.exports = function (access) {
                     id: seasonId,
                     location_id: location.id
                 }
-            })
+            });
         }).then(function (season) {
             renderEditView(res, {
                 id: season.id,
