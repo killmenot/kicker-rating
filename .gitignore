@@ -36,3 +36,6 @@ public/assets/components
 
 # Redis
 dump.rdb
+
+# Node
+npm-debug.log

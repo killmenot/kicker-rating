@@ -1,5 +1,4 @@
-Dashboard application for kicker rating
-=============
+# Dashboard application for kicker rating
 
 ## Dependencies
 
@@ -17,3 +16,7 @@ Dashboard application for kicker rating
 ## Run
 * `redis-server`
 * `make run`
+
+## Contrubutors
+
+* [Sklyarov Ivan](https://github.com/sklyarov-ivan)

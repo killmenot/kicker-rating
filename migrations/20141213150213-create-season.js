@@ -13,6 +13,11 @@ module.exports = {
         allowNull: true,
         type: DataTypes.STRING
       },
+      default: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+      },
       location_id: {
         allowNull: false,
         type: DataTypes.INTEGER

@@ -12,6 +12,7 @@ var RedisStore = require('connect-redis')(session);
 var config = require('./config');
 var bodyExpressSanitizer = require('./lib/middleware/sanitizer');
 var expressLocals = require('./lib/middleware/locals');
+var context = require('./lib/middleware/context');
 
 module.exports = function (redis) {
     var app = express();
@@ -41,6 +42,7 @@ module.exports = function (redis) {
     }));
     app.use(flash());
     app.use(expressLocals());
+    app.use(context());
 
     require('./config/passport')(app);
 

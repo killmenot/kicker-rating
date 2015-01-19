@@ -9,8 +9,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     location_id: {
-      type: DataTypes.INTEGER, 
+      type: DataTypes.INTEGER,
       allowNull: false
+    },
+    default: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
     },
     date_started: {
       type: DataTypes.DATE,
@@ -42,7 +47,7 @@ module.exports = function(sequelize, DataTypes) {
         var range = moment(this.date_started).format('LL') + ' - ' + (this.date_ended ? moment(this.date_ended).format('LL') : '');
 
         if (this.name) {
-          return this.name + '(' + range + ')';
+          return this.name + ' (' + range + ')';
         }
         
         return range;
