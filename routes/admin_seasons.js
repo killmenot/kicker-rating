@@ -15,7 +15,7 @@ function renderEditView(res, values, errors) {
 }
 
 module.exports = function (access) {
-    router.get('/', access.if_logged_in_as_admin(), function (req, res) {
+    router.get('/', access.if_logged_in_as_admin(), function (req, res, next) {
         req.context.getSeasons().then(function (seasons) {
             res.render('admin/seasons/index', {
                 mainNav: 'admin',
@@ -23,7 +23,7 @@ module.exports = function (access) {
                 title: 'Seasons list',
                 seasons: seasons
             });
-        });
+        }).catch(next);
     });
 
     router.get('/create', access.if_logged_in_as_admin(), function (req, res, next) {
@@ -43,7 +43,6 @@ module.exports = function (access) {
             note: req.body.note
         };
 
-        console.log(req.body.default, !!req.body.default);
         if (req.body.default) {
             seasonValues.default = !!req.body.default;
         }
