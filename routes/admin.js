@@ -10,18 +10,16 @@ module.exports = function (access) {
     });
 
     router.get('/sync', access.if_logged_in_as_admin(), function (req, res) {
-        var force = req.query.hasOwnProperty('force');
+        var params = {
+            force: req.query.hasOwnProperty('force');
+        };
 
-        models.sequelize.sync({
-            force: force
-        }).complete(function (err) {
-            if (err) {
-                console.error(err);
-                res.end('[ ERROR ] Synchronized database failed.');
-            } else {
-                console.log('[ OK ] Synchronized database.');
-                res.end('[ OK ] Synchronized database.');
-            }
+        models.sequelize.sync(params).then(function () {
+            console.log('[ OK ] Synchronized database.');
+            res.end('[ OK ] Synchronized database.');
+        }).catch(function (err) {
+            console.error(err);
+            res.end('[ ERROR ] Synchronized database failed.');
         });
     });
 
