@@ -1,1 +1,16 @@
-tournaments
+<div class="row">
+    <div class="col-md-1 mb-md">
+        <a href="/admin/tournaments/create" class="btn btn-primary">Create new tournament</a>
+    </div>
+</div>
+
+<div class="row table-responsive">
+  <table class="table table-striped">
+  <% tournaments.forEach(function (tournament) { %>
+    <tr>
+      <td><a href="/admin/tournaments/edit/<%= tournament.id %>"><%= tournament.name %></a></td>
+      <td><a class="btn btn-danger">Delete</a></td>
+    </div>
+  <% }) %>
+  </table>
+</div>

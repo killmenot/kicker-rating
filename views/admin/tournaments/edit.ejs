@@ -1,0 +1,71 @@
+<form action="" method="POST" class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <p class="bg-danger errors"></p>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<%= values.name || '' %>" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="season">Season</label>
+        <select class="form-control" id="season" name="season">
+            <% values.seasons.forEach(function (season) { %>
+                <option value="<%= season.id %>" <%= season.isSelected ? 'selected' : '' %> ><%= season.title %></option>
+            <% }) %>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group<%= errors.date_started ? ' has-error has-feedback' : '' %>">
+        <label class="control-label" for="date_started">Date started</label>
+        <input type="text" class="input-sm form-control" name="date_started" id="date_started" placeholder="Enter date started" data-provide="datepicker" value="<%= values.date_started || '' %>"/>
+        <% if(errors.date_started) { %>
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <small class="help-block"><%= errors.date_started.message %></small>
+        <% } %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group<%= errors.date_ended ? ' has-error has-feedback' : '' %>">
+        <label class="control-label" for="date_ended">Date ended</label>
+        <input type="text" class="input-sm form-control" name="date_ended" id="date_ended" placeholder="Enter date ended" data-provide="datepicker" value="<%= values.date_ended || '' %>"/>
+        <% if(errors.date_ended) { %>
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <small class="help-block"><%= errors.date_ended.message %></small>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="checkbox mt-0">
+        <label>
+          <input type="checkbox" name="default" <%= (values.id && !!values.default) ? 'disabled' : '' %> <%= (!!values.default) ? 'checked' : '' %> />Make default
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="note">Note</label>
+        <textarea name="note" id="note" class="form-control" placeholder="Enter a note" value="<%= values.note || '' %>"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row pull-right">
+    <div class="col-md-12">
+      <input type="submit" class="btn btn-primary" value="Submit" />
+      or
+      <a href="/admin/tournaments">Cancel</a>
+    </div>
+  </div>
+</form>
