@@ -31,18 +31,10 @@ module.exports = function (access) {
     });
 
     router.get('/create', access.if_logged_in_as_admin(), function (req, res, next) {
-        req.context.getTournaments().then(function (tournaments) {
-            var defaultTournamentValues = {
-                default: (tournaments && tournaments.length === 0)
-            };
-            return db.Sequelize.Promise.resolve(defaultTournamentValues);
-        }).then(function (tournamentValues) {
-            req.context.getSeasons().then(function (seasons) {
-                seasons = convertSeasons(seasons);
-                tournamentValues.seasons = seasons;
-                renderEditView(res, tournamentValues);
-
-            }).catch(next);
+        req.context.getSeasons().then(function (seasons) {
+            var values = {};
+            values.seasons = convertSeasons(seasons);
+            renderEditView(res, values);
         }).catch(next);
     });
 
@@ -55,31 +47,11 @@ module.exports = function (access) {
             season_id: req.body.season
         };
 
-        if (req.body.default) {
-            tournamentValues.default = !!req.body.default;
-        }
-
         req.context.getLocation().then(function (location) {
             tournamentValues.location_id = location.id;
-
             return db.sequelize.transaction(function (t) {
-                return db.Sequelize.Promise.resolve().then(function () {
-                    if (tournamentValues.default) {
-                        return db.Tournament.update({
-                            default: false
-                        }, {
-                            transaction: t,
-                            where: {
-                                location_id: location.id
-                            }
-                        });
-                    } else {
-                        return db.Sequelize.Promise.resolve();
-                    }
-                }).then(function () {
-                    return db.Tournament.create(tournamentValues, {
-                        transaction: t
-                    });
+                return db.Tournament.create(tournamentValues, {
+                    transaction: t
                 });
             });
         }).then(function () {
@@ -110,8 +82,7 @@ module.exports = function (access) {
                     date_started: moment(tournament.date_started).format('L'),
                     date_ended: tournament.date_ended,
                     note: tournament.note,
-                    seasons: seasons,
-                    default: tournament.default
+                    seasons: seasons
                 });
             });
         }).catch(next);
@@ -127,10 +98,6 @@ module.exports = function (access) {
                 season_id: req.body.season
             };
 
-        if (req.body.default) {
-            tournamentValues.default = !!req.body.default;
-        }
-
         req.context.getLocation().then(function (location) {
             return db.Tournament.find({
                 where: {
@@ -141,24 +108,9 @@ module.exports = function (access) {
         }).then(function (tournament) {
             var markAsDefault = tournamentValues.default && !tournament.default;
             return db.sequelize.transaction(function (t) {
-                return db.Sequelize.Promise.resolve().then(function () {
-                    if (markAsDefault) {
-                        return db.Tournament.update({
-                            default: false
-                        }, {
-                            transaction: t,
-                            where: {
-                                location_id: tournament.location_id
-                            }
-                        });
-                    } else {
-                        return db.Sequelize.Promise.resolve();
-                    }
-                }).then(function () {
-                    return tournament.updateAttributes(tournamentValues, {
-                        transaction: t,
-                        validate: true
-                    });
+                return tournament.updateAttributes(tournamentValues, {
+                    transaction: t,
+                    validate: true
                 });
             });
         }).then(function () {
@@ -169,7 +121,6 @@ module.exports = function (access) {
             renderEditView(res, tournamentValues, err.errors);
         }).catch(next);
     });
-
 
     return router;
 };

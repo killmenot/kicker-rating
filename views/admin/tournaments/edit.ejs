@@ -46,15 +46,6 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="checkbox mt-0">
-        <label>
-          <input type="checkbox" name="default" <%= (values.id && !!values.default) ? 'disabled' : '' %> <%= (!!values.default) ? 'checked' : '' %> />Make default
-        </label>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
       <div class="form-group">
         <label for="note">Note</label>
         <textarea name="note" id="note" class="form-control" placeholder="Enter a note" value="<%= values.note || '' %>"></textarea>
