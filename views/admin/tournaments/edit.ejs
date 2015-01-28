@@ -4,42 +4,40 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="form-group">
+      <div class="form-group<%= errors.name ? ' has-error has-feedback' : '' %>">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<%= values.name || '' %>" required>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<%= values.name || '' %>">
+        <% if(errors.name) { %>
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <small class="help-block"><%= errors.name.message %></small>
+        <% } %>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      <div class="form-group">
-        <label for="season">Season</label>
-        <select class="form-control" id="season" name="season">
+      <div class="form-group<%= errors.season_id ? ' has-error has-feedback' : '' %>">
+        <label for="season_id">Season</label>
+        <select class="form-control" id="season_id" name="season_id">
             <% values.seasons.forEach(function (season) { %>
-                <option value="<%= season.id %>" <%= season.isSelected ? 'selected' : '' %> ><%= season.title %></option>
+                <option value="<%= season.id %>" <%= season.selected ? ' selected' : '' %> ><%= season.title %></option>
             <% }) %>
         </select>
+        <% if(errors.season_id) { %>
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <small class="help-block"><%= errors.season_id.message %></small>
+        <% } %>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <div class="form-group<%= errors.date_started ? ' has-error has-feedback' : '' %>">
-        <label class="control-label" for="date_started">Date started</label>
-        <input type="text" class="input-sm form-control" name="date_started" id="date_started" placeholder="Enter date started" data-provide="datepicker" value="<%= values.date_started || '' %>"/>
-        <% if(errors.date_started) { %>
+    <div class="col-md-12">
+      <div class="form-group<%= errors.date ? ' has-error has-feedback' : '' %>">
+        <label class="control-label" for="date_started">Date</label>
+        <input type="text" class="input-sm form-control" name="date" id="date" placeholder="Enter date" data-provide="datepicker" value="<%= values.date || '' %>">
+        <% if(errors.date) { %>
         <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-        <small class="help-block"><%= errors.date_started.message %></small>
-        <% } %>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group<%= errors.date_ended ? ' has-error has-feedback' : '' %>">
-        <label class="control-label" for="date_ended">Date ended</label>
-        <input type="text" class="input-sm form-control" name="date_ended" id="date_ended" placeholder="Enter date ended" data-provide="datepicker" value="<%= values.date_ended || '' %>"/>
-        <% if(errors.date_ended) { %>
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-        <small class="help-block"><%= errors.date_ended.message %></small>
+        <small class="help-block"><%= errors.date.message %></small>
         <% } %>
       </div>
     </div>

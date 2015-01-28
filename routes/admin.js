@@ -11,7 +11,7 @@ module.exports = function (access) {
 
     router.get('/sync', access.if_logged_in_as_admin(), function (req, res) {
         var params = {
-            force: req.query.hasOwnProperty('force');
+            force: req.query.hasOwnProperty('force')
         };
 
         db.sequelize.sync(params).then(function () {

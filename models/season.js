@@ -51,6 +51,12 @@ module.exports = function (sequelize, DataTypes) {
                 }
 
                 return range;
+            },
+            date_started_timestamp: function () {
+                return moment(this.date_started).unix();
+            },
+            date_ended_timestamp: function () {
+                return this.date_ended ? moment(this.date_ended).unix() : null;
             }
         }
     });

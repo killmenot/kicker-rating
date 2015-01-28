@@ -1,11 +1,28 @@
 'use strict';
 
+var moment = require('moment');
+
 module.exports = function (sequelize, DataTypes) {
     return sequelize.define('Tournament', {
-        name: DataTypes.STRING,
-        date: DataTypes.DATE,
-        season_id: DataTypes.INTEGER,
-        location_id: DataTypes.INTEGER,
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        date: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
+        },
+        season_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        location_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         note: {
             type: DataTypes.TEXT,
             allowNull: true
@@ -15,6 +32,14 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 models.Tournament.belongsTo(models.Season);
                 models.Tournament.belongsTo(models.Location);
+            }
+        },
+        getterMethods: {
+            title: function () {
+                return this.name + ' (' + moment(this.date).format('LL') + ')';
+            },
+            date_timestamp: function () {
+                return moment(this.date).unix();
             }
         }
     });

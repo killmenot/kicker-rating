@@ -8,8 +8,8 @@
   <table class="table table-striped">
   <% tournaments.forEach(function (tournament) { %>
     <tr>
-      <td><a href="/admin/tournaments/edit/<%= tournament.id %>"><%= tournament.name %></a></td>
-      <!--<td><a class="btn btn-danger">Delete</a></td>-->
+      <td><a href="/admin/tournaments/edit/<%= tournament.id %>"><%= tournament.title %></a></td>
+      <td><a class="btn btn-danger">Delete</a></td>
     </div>
   <% }) %>
   </table>

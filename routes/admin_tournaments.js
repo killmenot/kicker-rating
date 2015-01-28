@@ -4,9 +4,24 @@ var express = require('express'),
     _ = require('underscore'),
     moment = require('moment');
 
-function convertSeasons (seasons) {
-    return _.map(seasons, function (s) { return _.extend(_.pick(s, 'id', 'title'), { isSelected: false }); });
-};
+function getSeasons(req, options) {
+    options = options || {};
+
+    return req.context.getSeasons().then(function (seasons) {
+        return _.chain(seasons)
+            .sortBy(function (season) {
+                return season.date_started_timestamp * (-1);
+            })
+            .map(function (season) {
+                return {
+                    id: season.id,
+                    title: season.title,
+                    selected: options.seasonId ? options.seasonId === season.id : season.default
+                };
+            })
+            .value();
+    });
+}
 
 function renderEditView(res, values, errors) {
     res.render('admin/tournaments/edit', {
@@ -14,9 +29,11 @@ function renderEditView(res, values, errors) {
         subNav: 'tournaments',
         title: values.id ? 'Edit tournament' : 'Create tournament',
         values: values,
-        errors: errors ? _.object(_.map(errors, function (error) { return [error.path, error]; })) : {}
+        errors: errors ? _.object(_.map(errors, function (error) {
+            return [error.path, error];
+        })) : {}
     });
-};
+}
 
 module.exports = function (access) {
     router.get('/', access.if_logged_in_as_admin(), function (req, res, next) {
@@ -31,56 +48,56 @@ module.exports = function (access) {
     });
 
     router.get('/create', access.if_logged_in_as_admin(), function (req, res, next) {
-        req.context.getSeasons().then(function (seasons) {
-            var values = {};
-            values.seasons = convertSeasons(seasons);
-            renderEditView(res, values);
+        getSeasons(req).then(function (seasons) {
+            if (seasons.length === 0) {
+                req.flash('error', 'You should create at least one season before creating any tournaments.');
+                res.redirect('/admin/seasons/create');
+            } else {
+                renderEditView(res, {
+                    seasons: seasons
+                });
+            }
         }).catch(next);
     });
 
     router.post('/create', access.if_logged_in_as_admin(), function (req, res, next) {
         var tournamentValues = {
             name: req.body.name,
-            date_started: req.body.date_started,
-            date_ended: req.body.date_ended,
-            note: req.body.note,
-            season_id: req.body.season
+            date: req.body.date,
+            season_id: parseInt(req.body.season_id, 10),
+            note: req.body.note
         };
 
         req.context.getLocation().then(function (location) {
             tournamentValues.location_id = location.id;
-            return db.sequelize.transaction(function (t) {
-                return db.Tournament.create(tournamentValues, {
-                    transaction: t
-                });
-            });
+            return db.Tournament.create(tournamentValues);
         }).then(function () {
             req.flash('success', 'The tournament was added successfully.');
             res.redirect('/admin/tournaments');
         }).catch(db.Sequelize.ValidationError, function (err) {
-            renderEditView(res, tournamentValues, err.errors);
+            var options = {
+                seasonId: tournamentValues.season_id
+            };
+            return getSeasons(req, options).then(function (seasons) {
+                tournamentValues.seasons = seasons;
+                renderEditView(res, tournamentValues, err.errors);
+            });
         }).catch(next);
     });
 
     router.get('/edit/:id', access.if_logged_in_as_admin(), function (req, res, next) {
-        var tournamentId = parseInt(req.params.id, 10);
+        var id = parseInt(req.params.id, 10);
 
-        req.context.getLocation().then(function (location) {
-            return db.Tournament.find({
-                where: {
-                    id: tournamentId,
-                    location_id: location.id
-                }
-            });
-        }).then(function (tournament) {
-            req.context.getSeasons().then(function (seasons) {
-                seasons = convertSeasons(seasons);
-                _.find(seasons, function (s) { return s.id == tournament.season_id; }).isSelected = true;
+        req.context.getTournament(id).then(function (tournament) {
+            var options = {
+                seasonId: tournament.season_id
+            };
+            return getSeasons(req, options).then(function (seasons) {
                 renderEditView(res, {
                     id: tournament.id,
                     name: tournament.name,
-                    date_started: moment(tournament.date_started).format('L'),
-                    date_ended: tournament.date_ended,
+                    season_id: tournament.season_id,
+                    date: moment(tournament.date).format('L'),
                     note: tournament.note,
                     seasons: seasons
                 });
@@ -89,36 +106,30 @@ module.exports = function (access) {
     });
 
     router.post('/edit/:id', access.if_logged_in_as_admin(), function (req, res, next) {
-        var tournamentId = parseInt(req.params.id, 10),
+        var id = parseInt(req.params.id, 10),
             tournamentValues = {
                 name: req.body.name,
-                date_started: req.body.date_started,
-                date_ended: req.body.date_ended,
-                note: req.body.note,
-                season_id: req.body.season
+                date: req.body.date,
+                season_id: parseInt(req.body.season_id, 10),
+                note: req.body.note
             };
 
-        req.context.getLocation().then(function (location) {
-            return db.Tournament.find({
-                where: {
-                    id: tournamentId,
-                    location_id: location.id
-                }
-            });
-        }).then(function (tournament) {
-            var markAsDefault = tournamentValues.default && !tournament.default;
-            return db.sequelize.transaction(function (t) {
-                return tournament.updateAttributes(tournamentValues, {
-                    transaction: t,
-                    validate: true
-                });
+        req.context.getTournament(id).then(function (tournament) {
+            return tournament.updateAttributes(tournamentValues, {
+                validate: true
             });
         }).then(function () {
             req.flash('success', 'The tournament was updated successfully.');
             res.redirect('/admin/tournaments');
         }).catch(db.Sequelize.ValidationError, function (err) {
-            tournamentValues.id = tournamentId;
-            renderEditView(res, tournamentValues, err.errors);
+            var options = {
+                seasonId: tournamentValues.season_id
+            };
+            return getSeasons(req, options).then(function (seasons) {
+                tournamentValues.seasons = seasons;
+                tournamentValues.id = id;
+                renderEditView(res, tournamentValues, err.errors);
+            });
         }).catch(next);
     });
 
