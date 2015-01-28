@@ -69,9 +69,11 @@
     <% include partials/_flash %>
     <%- body %>
   </div>
-  <script src="/assets/components/jquery/dist/jquery.min.js"></script>
-  <script src="/assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="/assets/components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+  <% if (typeof script !== 'undefined') { %>
+    <%- script %>
+  <% } else { %>
+    <script data-main="/javascripts/config/default" src="/assets/components/requirejs/require.js"></script>
+  <% } %>
 </body>
 
 </html>
