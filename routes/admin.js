@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var models = require('../models');
+var db = require('../models');
 
 module.exports = function (access) {
     router.get('/', access.if_logged_in_as_admin(), function (req, res) {
@@ -14,7 +14,7 @@ module.exports = function (access) {
             force: req.query.hasOwnProperty('force');
         };
 
-        models.sequelize.sync(params).then(function () {
+        db.sequelize.sync(params).then(function () {
             console.log('[ OK ] Synchronized database.');
             res.end('[ OK ] Synchronized database.');
         }).catch(function (err) {
