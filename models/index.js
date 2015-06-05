@@ -6,8 +6,14 @@ if (!global.hasOwnProperty('db')) {
     var Sequelize = require('sequelize');
     var env = process.env.NODE_ENV || 'development';
     var config = require(__dirname + '/../config/config.json')[env];
-    var sequelize = new Sequelize(config.database, config.username, config.password, config);
+    var sequelize = null;
     var db = {};
+
+    if (process.env.HEROKU_POSTGRESQL_CRIMSON_URL) {
+        sequelize = new Sequelize(process.env.HEROKU_POSTGRESQL_CRIMSON_URL, config)
+    } else {
+        sequelize = new Sequelize(config.database, config.username, config.password, config);
+    }
 
     fs
         .readdirSync(__dirname)
