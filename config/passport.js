@@ -25,7 +25,7 @@ module.exports = function (app) {
     });
 
     passport.deserializeUser(function (id, done) {
-      models.User.find(id)
+      models.User.findById(id)
         .then(function (user) {
           done(null, user);
         })
