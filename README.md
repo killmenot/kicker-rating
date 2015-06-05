@@ -1,4 +1,7 @@
+
 # Dashboard application for kicker rating
+
+[![Dependency Status](https://gemnasium.com/killmenot/kicker-rating.svg)](https://gemnasium.com/killmenot/kicker-rating)
 
 ## Dependencies
 
