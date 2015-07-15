@@ -35,6 +35,18 @@
           <% } %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:" role="button"
+              aria-haspopup="true" aria-expanded="false">Locations <span class="caret"></span>
+            </a>
+            <% if (locations.length > 0) { %>
+              <ul class="dropdown-menu">
+                <% locations.forEach(function (location) { %>
+                  <li><a href="#"><%= location.name %></a></li>
+                <% }) %>
+              </ul>
+            <% } %>
+          </li>
           <% if (user) {%>
             <li><a href="/logout">Sign out</a></li>
           <% } else { %>
