@@ -35,18 +35,18 @@
           <% } %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:" role="button"
-              aria-haspopup="true" aria-expanded="false">Locations <span class="caret"></span>
-            </a>
-            <% if (locations.length > 0) { %>
+          <% if (active_locations.length > 0) { %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:" role="button"
+                aria-haspopup="true" aria-expanded="false">Locations <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
-                <% locations.forEach(function (location) { %>
+                <% active_locations.forEach(function (location) { %>
                   <li><a href="#"><%= location.name %></a></li>
                 <% }) %>
               </ul>
-            <% } %>
-          </li>
+            </li>
+          <% } %>
           <% if (user) {%>
             <li><a href="/logout">Sign out</a></li>
           <% } else { %>
@@ -69,6 +69,7 @@
       </div>
       <div class="collapse navbar-collapse main-nav">
         <ul class="nav navbar-nav">
+          <li<%- activeNav(subNav, 'locations') %>><a href="/admin/locations">Locations</a></li>
           <li<%- activeNav(subNav, 'seasons') %>><a href="/admin/seasons">Seasons</a></li>
           <li<%- activeNav(subNav, 'tournaments') %>><a href="/admin/tournaments">Tournaments</a></li>
         </ul>
