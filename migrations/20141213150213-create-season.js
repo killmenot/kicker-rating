@@ -1,50 +1,50 @@
 'use strict';
 
 module.exports = {
-    up: function (migration, DataTypes, done) {
-        migration.createTable('seasons', {
+    up: function (queryInterface, Sequelize, done) {
+        queryInterface.createTable('seasons', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             name: {
                 allowNull: true,
-                type: DataTypes.STRING
+                type: Sequelize.STRING
             },
             default: {
-                type: DataTypes.BOOLEAN,
+                type: Sequelize.BOOLEAN,
                 allowNull: false,
                 defaultValue: false
             },
             location_id: {
                 allowNull: false,
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             date_started: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             },
             date_ended: {
                 allowNull: true,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             },
             note: {
                 allowNull: true,
-                type: DataTypes.TEXT
+                type: Sequelize.TEXT
             },
             created_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             },
             updated_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             }
         }).finally(done);
     },
-    down: function (migration, DataTypes, done) {
-        migration.dropTable('seasons').finally(done);
+    down: function (queryInterface, Sequelize, done) {
+        queryInterface.dropTable('seasons').finally(done);
     }
 };

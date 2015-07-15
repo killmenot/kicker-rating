@@ -1,40 +1,40 @@
 'use strict';
 module.exports = {
-    up: function (migration, DataTypes, done) {
-        migration.createTable('tournament_results', {
+    up: function (queryInterface, Sequelize, done) {
+        queryInterface.createTable('tournament_results', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             tournament_id: {
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             member_id: {
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             season_id: {
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             score: {
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             note: {
                 allowNull: true,
-                type: DataTypes.TEXT
+                type: Sequelize.TEXT
             },
             created_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             },
             updated_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             }
         }).finally(done);
     },
-    down: function (migration, DataTypes, done) {
-        migration.dropTable('tournament_results').finally(done);
+    down: function (queryInterface, Sequelize, done) {
+        queryInterface.dropTable('tournament_results').finally(done);
     }
 };

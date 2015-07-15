@@ -3,29 +3,29 @@
 var models = require('../models');
 
 module.exports = {
-    up: function (migration, DataTypes, done) {
-        migration.createTable('users', {
+    up: function (queryInterface, Sequelize, done) {
+        queryInterface.createTable('users', {
             id: {
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true,
-                type: DataTypes.INTEGER
+                type: Sequelize.INTEGER
             },
             username: {
                 allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.STRING
             },
             password: {
                 allowNull: false,
-                type: DataTypes.STRING
+                type: Sequelize.STRING
             },
             created_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             },
             updated_at: {
                 allowNull: false,
-                type: DataTypes.DATE
+                type: Sequelize.DATE
             }
         }).finally(function () {
             var admin = models.User.build({
@@ -34,7 +34,7 @@ module.exports = {
             admin.set_password('12345').save().finally(done);
         });
     },
-    down: function (migration, DataTypes, done) {
-        migration.dropTable('users').finally(done);
+    down: function (queryInterface, Sequelize, done) {
+        queryInterface.dropTable('users').finally(done);
     }
 };
