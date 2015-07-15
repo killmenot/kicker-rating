@@ -52,6 +52,7 @@ module.exports = function (redis) {
     app.use('/admin', require('./routes/admin')(access));
     app.use('/admin/seasons', require('./routes/admin_seasons')(access));
     app.use('/admin/tournaments', require('./routes/admin_tournaments')(access));
+    app.use('/admin/locations', require('./routes/admin_locations')(access));
 
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {

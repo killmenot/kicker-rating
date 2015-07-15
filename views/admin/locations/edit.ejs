@@ -1,0 +1,32 @@
+<form action="" method="POST" class="col-md-6 col-md-offset-3">
+  <div class="row">
+    <p class="bg-danger errors"></p>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group<%= errors.name ? ' has-error has-feedback' : '' %>">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<%= values.name || '' %>">
+        <% if(errors.name) { %>
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <small class="help-block"><%= errors.name.message %></small>
+        <% } %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="note">Note</label>
+        <textarea name="note" id="note" class="form-control" placeholder="Enter a note"><%= values.note || '' %></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row pull-right">
+    <div class="col-md-12">
+      <input type="submit" class="btn btn-primary" value="Submit" />
+      or
+      <a href="/admin/locations">Cancel</a>
+    </div>
+  </div>
+</form>

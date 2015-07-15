@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-md-1 mb-md">
+        <a href="/admin/locations/create" class="btn btn-primary">Create new location</a>
+    </div>
+</div>
+
+<div class="row table-responsive">
+  <table class="table table-striped">
+  <% locations.forEach(function (location) { %>
+    <tr>
+      <td><a href="/admin/locations/edit/<%= location.id %>"><%= location.name %></a></td>
+      <td><a class="btn btn-danger">Delete</a></td>
+    </div>
+  <% }) %>
+  </table>
+</div>
