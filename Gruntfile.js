@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
@@ -29,6 +29,15 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    mocha: {
+      client: {
+        src: ['tests/client/testrunner.html']
+      },
+      options: {
+        run: true
+      }
+    }
 
     bump: {
       options: {
