@@ -40,3 +40,6 @@ dump.rdb
 # Node
 npm-debug.log
 .idea
+
+# Laravel
+vendor
