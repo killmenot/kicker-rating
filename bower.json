@@ -1,0 +1,22 @@
+{
+  "name": "kicker-rating",
+  "version": "0.0.1",
+  "homepage": "https://github.com/silentlagoon/kicker-rating",
+  "authors": [
+    "Dmitry Kurilenko <dmitry@intspirit.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5"
+  }
+}
