@@ -1,27 +1,41 @@
-<form method="POST" action="/auth/register">
-    {!! csrf_field() !!}
+@extends('layouts.master')
 
-    <div>
-        Name
-        <input type="text" name="name" value="{{ old('name') }}">
-    </div>
+@section('title', 'Register Page')
 
-    <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
-    </div>
+@section('content')
+    {!! Form::open(array('url' => '/auth/register', 'method' => 'POST', 'class' => 'form-horizontal')) !!}
+        <div class="form-group">
+            {!! Form::label('name', 'Name', array('class' => 'col-sm-1')) !!}
+            <div class="col-sm-5">
+                {!! Form::text('name', '', array('class' => 'form-control', 'value' => \Illuminate\Support\Facades\Request::old('name'))) !!}
+            </div>
+        </div>
 
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
+        <div class="form-group">
+            {!! Form::label('email', 'Email', array('class' => 'col-sm-1')) !!}
+            <div class="col-sm-5">
+                {!! Form::text('email', '', array('class' => 'form-control', 'value' => \Illuminate\Support\Facades\Request::old('email'))) !!}
+            </div>
+        </div>
 
-    <div>
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
+        <div class="form-group">
+            {!! Form::label('password', 'Password', array('class' => 'col-sm-1')) !!}
+            <div class="col-sm-5">
+                {!! Form::password('password', array('class' => 'form-control')) !!}
+            </div>
+        </div>
 
-    <div>
-        <button type="submit">Register</button>
-    </div>
-</form>
+        <div class="form-group">
+            {!! Form::label('password_confirmation', 'Confirm Password', array('class' => 'col-sm-1')) !!}
+            <div class="col-sm-5">
+                {!! Form::password('password_confirmation', array('class' => 'form-control')) !!}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-2">
+                {!! Form::submit('Register', array('class' => 'btn btn-default')) !!}
+            </div>
+        </div>
+    {!! Form::close() !!}
+@endsection

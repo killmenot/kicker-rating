@@ -7,7 +7,7 @@
         <div class="form-group">
             {!! Form::label('email', 'Email', array('class' => 'col-sm-1')) !!}
             <div class="col-sm-5">
-                {!! Form::text('email', 'example@gmail.com', array('class' => 'form-control')) !!}
+                {!! Form::text('email', 'example@gmail.com', array('class' => 'form-control', 'value' => \Illuminate\Support\Facades\Request::old('email'))) !!}
             </div>
         </div>
 
