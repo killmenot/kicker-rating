@@ -1,24 +1,17 @@
 
 # Dashboard application for kicker rating
 
-[![Dependency Status](https://gemnasium.com/killmenot/kicker-rating.svg)](https://gemnasium.com/killmenot/kicker-rating)
-
 ## Dependencies
 
-* NodeJS 0.10.33+
-* PostgreSQL 9.3.5
+* MySQL Ver 14.14 Distrib 5.6.20
 
 ## Setup
-* `git clone git@github.com:killmenot/kicker-rating.git`
-* `cd kicker-rating && make install`
-* `make init-database`
+* `git clone https://github.com/silentlagoon/kicker-rating`
+* `composer install`
+* `bower install`
 
 ## Migration
-* `make migrate`
-
-## Run
-* `redis-server`
-* `make run`
+* `php artisan migrate`
 
 ## Contrubutors
 
