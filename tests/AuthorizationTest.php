@@ -6,13 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthorizationTest extends TestCase
 {
-    use DatabaseMigrations;
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     /**
      * User registration
      */
