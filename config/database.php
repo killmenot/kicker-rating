@@ -52,6 +52,18 @@ return [
             'prefix'   => '',
         ],
 
+        'mysql_testing' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'kicker_rating_testing',
+            'username'  => 'root',
+            'password'  => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+            'strict'    => false,
+        ],
+
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
