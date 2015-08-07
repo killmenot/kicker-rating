@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Brand</a>
+                <a class="navbar-brand" href="#">Kicker-Rating</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,6 +65,12 @@
         </div><!-- /.container-fluid -->
     </nav>
         <div class="container">
+           @if(isset($errors))
+               @foreach($errors as $error)
+                    <p class="bg-danger">{!! $error !!}</p>
+                @endforeach
+            @endif
+
             @yield('content')
         </div>
     </body>
