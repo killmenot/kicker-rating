@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function()
     {
         return view('dashboard.index');
     });
+    Route::get('/dashboard/locations', 'Dashboard\LocationsController@getLocations');
 });
 
 // Authentication routes...
