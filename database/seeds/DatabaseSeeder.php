@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call('UserTableSeeder');
+        $this->command->info('User table seeded!');
+
         DB::table('users')->insert([
             'name' => 'Test',
             'email' => 'test@test.com',
@@ -21,5 +24,19 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Model::reguard();
+    }
+}
+
+class UserTableSeeder extends Seeder 
+{
+
+    public function run()
+    {
+        DB::table('users')->delete();
+        DB::table('users')->insert([
+            'name' => 'Dima',
+            'email' => 'dmitry@intspirit.com',
+            'password' => bcrypt('123456')
+        ]);
     }
 }
