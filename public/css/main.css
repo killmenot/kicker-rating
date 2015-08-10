@@ -1,0 +1,10 @@
+@media screen {
+	.main_page_logo {
+		width:100%;
+	}
+	.main_page_logo_buttons {
+		position: fixed;
+		top: 50%;
+		left:50%;
+	}
+}
