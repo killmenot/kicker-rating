@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Kicker-Rating - @yield('title')</title>
+        <link href="{{ URL::asset('/css/main.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
         <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
@@ -64,7 +65,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-        <div class="container">
+        <div class="container-fluid">
            @if(count($errors->all()))
                @foreach($errors->all() as $error)
                     <p class="bg-danger">{!! $error !!}</p>
