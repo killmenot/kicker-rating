@@ -9,6 +9,7 @@
         <link href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ URL::asset('vendor/bootstrap/dist/css/bootstrap-theme.min.css') }}" rel="stylesheet">
         <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('js/config.js') }}"></script>
         <script src="{{ URL::asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     </head>
     <body>
