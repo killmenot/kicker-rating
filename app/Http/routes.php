@@ -22,6 +22,9 @@ Route::group(['middleware' => ['auth']], function()
         return view('dashboard.index');
     });
     Route::get('/dashboard/locations', 'Dashboard\LocationsController@getLocations');
+
+
+    Route::post('/postLocationsAdd', 'View\ViewsController@postLocationsAdd');
 });
 
 // Authentication routes...
