@@ -1,5 +1,5 @@
-$(function () {
-    $.ajaxSetup({
-        headers: { 'X-CSRF-TOKEN': $('input[name="_token"]').val() }
-    });
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
 });
