@@ -8,32 +8,29 @@
 
 		<button id="create_location" class="btn btn-primary col-sm-2">Create Location</button>
 
-		<div id="create_location_container" class="hidden col-sm-12" style="margin-top:15px;">
-			{!! Form::open(array('url' => '/auth/login', 'method' => 'POST', 'class' => 'form-horizontal', 'id' => 'create_location_form')) !!}
-				<div id="create_location_group">
-					<div class="form-group">
-						{!! Form::label('name', 'Name', array('class' => 'col-sm-1')) !!}
-						<div class="col-sm-5">
-							{!! Form::text('name', '', array('class' => 'form-control')) !!}
-						</div>
-						<div class="col-sm-1">
-							<button type="button" id="add_more_locations" data-counter="0" class="btn btn-success">+</button>
-						</div>
-					</div>
-				</div>
-		        <div class="form-group">
-		            <div class="col-sm-offset-1 col-sm-2">
-		                {!! Form::submit('Finish', array('class' => 'btn btn-default')) !!}
-		                <button type="button" id="cancel_locations" class="btn btn-danger">Cancel</button>
-		            </div>
-		        </div>
-    		{!! Form::close() !!}
-		</div>
+		<div id="create_location_container" class="col-sm-12" style="margin-top:15px;"></div>
 
 		@if(count($locations))
-			@foreach($locations as $location)
-				<p>$location->name</p>
-			@endforeach
+            <div id="locations_list" class="col-sm-12" style="margin-top: 15px;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Location Name</th>
+                            <th>Created By </th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($locations as $location)
+                            <tr>
+                                <td>{!! $location->name !!}</td>
+                                <td>{!! $location->user->name !!}</td>
+                                <td>{!! $location->created_at !!}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 		@else
 			<p class="col-sm-12">No any locations found.</p>
 		@endif
