@@ -1,10 +1,10 @@
 <?php
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+$url = getenv("CLEARDB_DATABASE_URL");
 
-$host = ($url['path']) ? $url["host"] : '';
-$username = ($url['path']) ? $url["user"] : '';
-$password = ($url['path']) ? $url["pass"] : '';
-$database = ($url['path']) ? substr($url["path"], 1) : '';
+$host = ($url) ? 'eu-cdbr-west-01.cleardb.com' : '';
+$username = ($url) ? 'b895bd1850fa48' : '';
+$password = ($url) ? '9c991105' : '';
+$database = ($url) ? 'heroku_dccabb6809e0f' : '';
 
 return [
 
@@ -32,7 +32,7 @@ return [
     |
     */
 
-    'default' => ($url['path']) ? env('DB_CONNECTION', 'cleardb') : env('DB_CONNECTION', 'mysql'),
+    'default' => ($url) ? env('DB_CONNECTION', 'cleardb') : env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
