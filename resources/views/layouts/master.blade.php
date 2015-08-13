@@ -82,7 +82,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top: 100px;">
            @if(count($errors->all()))
 
                @foreach($errors->all() as $error)

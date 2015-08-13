@@ -6,7 +6,7 @@
 
 	<div class="container">
 
-		<button id="create_location" class="btn btn-primary col-sm-2" style="margin-top:100px;">Create Location</button>
+		<button id="create_location" class="btn btn-primary col-sm-2">Create Location</button>
 
 		<div id="create_location_container" class="col-sm-12" style="margin-top:15px;"></div>
 
