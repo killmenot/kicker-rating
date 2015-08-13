@@ -43,6 +43,8 @@ $(document).on('click', '#finish_locations', function(){
         .success(function(){
             $.post('/postLocationsListPartial', function(data){
                 $('#locations_list').empty().append(data);
+                $('#create_location_container').empty();
+                $('#create_location').prop('disabled', false);
             })
         })
         .error(function(){
