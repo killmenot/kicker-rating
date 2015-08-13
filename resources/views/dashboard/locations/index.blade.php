@@ -6,34 +6,13 @@
 
 	<div class="container">
 
-		<button id="create_location" class="btn btn-primary col-sm-2">Create Location</button>
+		<button id="create_location" class="btn btn-primary col-sm-2" style="margin-top:100px;">Create Location</button>
 
 		<div id="create_location_container" class="col-sm-12" style="margin-top:15px;"></div>
 
 		@if(count($locations))
             <div id="locations_list" class="col-sm-12" style="margin-top: 15px;">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Location Name</th>
-                            <th>Created By </th>
-                            <th>Created At</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($locations as $location)
-                            <tr>
-                                <td>{!! $location->name !!}</td>
-                                <td>{!! $location->user->name !!}</td>
-                                <td>{!! $location->created_at !!}</td>
-                                <td><a href="javascript;">Edit</a></td>
-                                <td><a class="btn btn-danger" href="javascript;">Delete</a></td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                @include('dashboard.locations.partials._locations_list')
             </div>
 		@else
 			<p class="col-sm-12">No any locations found.</p>
