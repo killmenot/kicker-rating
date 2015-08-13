@@ -13,8 +13,4 @@
         @endif
     </div>
 
-    <div class="main_page_logo">
-        <img class="main_page_logo" src="{{ URL::asset('/img/kicker.jpg') }}" />
-    </div>
-
 @endsection
