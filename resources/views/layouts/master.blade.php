@@ -31,8 +31,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-
-                    <li class="active">
+                    <li class="{!! (isset($active) && $active == 'locations') ? 'active' : '' !!}">
                         <a href="{{ URL::action('Dashboard\LocationsController@getLocations') }}">
                             Locations
                             <span class="sr-only">(current)</span>

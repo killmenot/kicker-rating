@@ -17,7 +17,10 @@ class LocationsController extends Controller
     public function getLocations()
     {
         return View::make('dashboard.locations.index')
-            ->with('locations', Location::all());
+            ->with([
+                'locations' => Location::all(),
+                'active' => 'locations'
+            ]);
     }
 
     /**
