@@ -56,3 +56,14 @@ $(document).on('click', '#cancel_locations', function(){
     $('#create_location_container').empty();
     $('#create_location').prop('disabled', false);
 });
+
+$(document).on('click', '.location_delete_button', function(){
+    var locationId = $(this).data('id');
+
+    $.post('/dashboard/locations/deleteLocation', {location_id: locationId}, function(){
+        $.post('/postLocationsListPartial', function(data){
+            $('#locations_list').empty().append(data);
+        })
+    });
+    return false;
+});

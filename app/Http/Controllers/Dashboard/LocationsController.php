@@ -52,4 +52,16 @@ class LocationsController extends Controller
     {
         session(['location_id' => $request->input('location_id')]);
     }
+
+    public function postDeleteLocation(Request $request)
+    {
+        $locationId = intval($request->input('location_id'));
+        if($locationId)
+        {
+            Location::find($locationId)->delete();
+            return response(Location::all());
+        }
+        return redirect('dashboard/locations')
+            ->withErrors('No location id passed');
+    }
 }

@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function()
     Route::get('/dashboard/locations', 'Dashboard\LocationsController@getLocations');
     Route::post('/dashboard/locations', 'Dashboard\LocationsController@postLocations');
     Route::post('/dashboard/locations/setLocation', 'Dashboard\LocationsController@postSetLocation');
+    Route::post('/dashboard/locations/deleteLocation', 'Dashboard\LocationsController@postDeleteLocation');
 
 
     /*

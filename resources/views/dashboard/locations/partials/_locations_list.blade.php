@@ -15,7 +15,7 @@
             <td>{!! $location->user->name !!}</td>
             <td>{!! $location->created_at !!}</td>
             <td><a href="javascript;">Edit</a></td>
-            <td><a class="btn btn-danger" href="javascript;">Delete</a></td>
+            <td><a href="javascript;" data-id="{!! $location->id !!}" class="location_delete_button btn btn-danger" >Delete</a></td>
         </tr>
     @endforeach
     </tbody>
