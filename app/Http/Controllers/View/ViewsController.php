@@ -37,8 +37,13 @@ class ViewsController extends Controller
      */
     public function postLocationsListPartial()
     {
-        $locations = Location::all();
         return View::make('dashboard.locations.partials._locations_list')
-            ->with('locations', $locations);
+            ->with('locations', Location::all());
+    }
+
+    public function postLocationsNamesListPartial()
+    {
+        return View::make('layouts.partials._user_menu')
+            ->with('locations', Location::all());
     }
 }

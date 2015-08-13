@@ -12,6 +12,7 @@
         <script src="{{ URL::asset('vendor/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ URL::asset('js/config.js') }}"></script>
         <script src="{{ URL::asset('vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+        <script src="{{ URL::asset('js/layouts/master/account_menu.js') }}"></script>
     </head>
     <body>
         <nav class="navbar navbar-default">
@@ -62,17 +63,14 @@
 
                     @if(Auth::check())
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a href="#" class="account_menu dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }}
                                 <span class="caret"></span>
+                                <ul class="account_append_section dropdown-menu">
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ URL::action('Auth\AuthController@getLogout') }}">Logout</a></li>
+                                </ul>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ URL::action('Auth\AuthController@getLogout') }}">Logout</a></li>
-                            </ul>
                         </li>
                     @endif
 
@@ -83,7 +81,7 @@
         <div class="container-fluid">
            @if(count($errors->all()))
                @foreach($errors->all() as $error)
-                    <p class="bg-danger">{!! $error !!}</p>
+                    <div class="alert alert-danger">{!! $error !!}</div>
                 @endforeach
             @endif
 

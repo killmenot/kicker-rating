@@ -11,13 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class LocationsController extends Controller
 {
+    /**
+     * @return mixed
+     */
     public function getLocations()
     {
         return View::make('dashboard.locations.index')
             ->with('locations', Location::all());
     }
 
-	public function postLocations(Request $request)
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function postLocations(Request $request)
     {
         if($request->ajax())
         {
@@ -38,8 +45,11 @@ class LocationsController extends Controller
             ->header('HTTP/1.1 500 Internal Server Error');
     }
 
-    public function setLocation(Request $request)
+    /**
+     * @param Request $request
+     */
+    public function postSetLocation(Request $request)
     {
-
+        session(['location_id' => $request->input('location_id')]);
     }
 }
