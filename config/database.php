@@ -1,12 +1,10 @@
 <?php
 $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-if($url)
-{
-    $host = $url["host"];
-    $username = $url["user"];
-    $password = $url["pass"];
-    $database = substr($url["path"], 1);
-}
+
+$host = ($url['path']) ? $url["host"] : '';
+$username = ($url['path']) ? $url["user"] : '';
+$password = ($url['path']) ? $url["pass"] : '';
+$database = ($url['path']) ? substr($url["path"], 1) : '';
 
 return [
 
@@ -34,7 +32,7 @@ return [
     |
     */
 
-    'default' => ($url) ? env('DB_CONNECTION', 'cleardb') : env('DB_CONNECTION', 'mysql'),
+    'default' => ($url['path']) ? env('DB_CONNECTION', 'cleardb') : env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
