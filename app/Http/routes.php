@@ -22,6 +22,10 @@ Route::group(['middleware' => ['auth']], function()
         return view('dashboard.index');
     });
 
+    //Admin Controller
+    Route::get('/dashboard/admin', 'Dashboard\AdminController@getAdmin');
+
+    //Locations Controller
     Route::get('/dashboard/locations', 'Dashboard\LocationsController@getLocations');
     Route::post('/dashboard/locations', 'Dashboard\LocationsController@postLocations');
     Route::post('/dashboard/locations/setLocation', 'Dashboard\LocationsController@postSetLocation');
@@ -38,7 +42,6 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('/postLocationsNamesListPartial', 'View\ViewsController@postLocationsNamesListPartial');
 
     /*Locations*/
-    Route::post('/postCreateLocationContainer', 'View\ViewsController@postCreateLocationContainer');
     Route::post('/postLocationsAdd', 'View\ViewsController@postLocationsAdd');
     Route::post('/postLocationsListPartial', 'View\ViewsController@postLocationsListPartial');
 });

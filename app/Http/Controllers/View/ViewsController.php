@@ -15,11 +15,6 @@ class ViewsController extends Controller
     |--------------------------------------------------------------------------
     */
 
-    public function postCreateLocationContainer()
-    {
-        return View::make('dashboard.locations.partials._create_location_container');
-    }
-
     /**
      * @param Request $request
      * @return mixed

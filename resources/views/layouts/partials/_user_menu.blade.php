@@ -14,5 +14,4 @@
         <a href="javascript;">No locations available</a>
     </li>
 @endif
-<li role="separator" class="divider"></li>
-<li><a href="{{ URL::action('Auth\AuthController@getLogout') }}">Logout</a></li>
+<li class="hidden"><a href="javascript;"></a></li>
