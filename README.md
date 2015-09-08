@@ -1,4 +1,3 @@
- 
 # Dashboard application for kicker rating
 
 ## Dependencies
@@ -17,3 +16,6 @@
 
 * [Sklyarov Ivan](https://github.com/sklyarov-ivan)
 * [Alexander Lytyuk](https://github.com/realspolock)
+
+
+## Thanks To
