@@ -1,4 +1,4 @@
-
+ 
 # Dashboard application for kicker rating
 
 ## Dependencies
