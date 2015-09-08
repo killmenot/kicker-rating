@@ -1,26 +1,22 @@
 {
   "name": "kicker-rating",
-  "version": "0.1.0",
-  "homepage": "https://github.com/killmenot/kicker-rating",
+  "version": "0.0.1",
+  "homepage": "https://github.com/silentlagoon/kicker-rating",
   "authors": [
-    "Alexey Kucherenko <alexei.kucherenko@gmail.com>"
+    "Dmitry Kurilenko <dmitry@intspirit.com>"
   ],
-  "description": "The stats app for kicker rating",
   "license": "MIT",
   "private": true,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "public/vendor",
     "test",
     "tests"
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "bootstrap": "~3.3.4",
-    "bootstrap-datepicker": "~1.4.0",
-    "bootstrap-responsive-margins": "~1.0.0",
-    "requirejs": "~2.1.17",
-    "bootbox": "~4.4.0"
+    "bootstrap": "~3.3.5"
   }
 }
